@@ -207,9 +207,9 @@ for link in links:
 # Guardo los datos de la request a las paginas principales
 encabezados = ["link", "precio", "lugar"]
 df_links = pd.DataFrame(links, columns=encabezados)
-df_links.to_csv("Engelyvolkers_links.csv", index=False, encoding="utf-8")
+df_links.to_csv("data_engelyvoelkers/Engelyvolkers_links.csv", index=False, encoding="utf-8")
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Guardo los datos de todas las paginas
-df_lectura = pd.Dataframe(lectura)
-df_links.to_csv("Engelyvolkers_lectura.csv", index=False, encoding="utf-8")
+df_lectura = pd.DataFrame(lectura)
+df_lectura.to_csv("data_engelyvoelkers/Engelyvolkers_lectura.csv", index=False, encoding="utf-8")
