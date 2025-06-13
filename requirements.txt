@@ -1,0 +1,36 @@
+# Machine Learning & Deep Learning
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+xgboost
+lightgbm
+tensorflow
+keras
+torch
+torchvision
+torchaudio
+fastai
+transformers
+sentence-transformers
+
+# Web Scraping
+requests
+beautifulsoup4
+lxml
+selenium
+scrapy
+httpx
+html5lib
+pyppeteer
+urllib3
+fake-useragent
+
+# Utilidades generales
+tqdm
+opencv-python
+scipy
+joblib
+nltk
+spacy
