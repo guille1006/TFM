@@ -4,6 +4,8 @@ import re
 import warnings
 from itertools import chain
 import pandas as pd
+import os
+from datetime import date
 
 
 # Funcion para convertir los textos en numero
@@ -108,7 +110,7 @@ def read_link(link, location):
             "living_surf": ["habitable"],
             "usable_area": ["utilizable"],
             "floor_type": ["Suelo"],
-            "construc_year": ["Año", "construcción"],
+            "construc_year": ["construcción"],
             "energy_cert_avail": ["Certificado"],
             "heating": ["Fuente"]
         }
@@ -153,7 +155,7 @@ def read_link(link, location):
     comentario = soup.find('div', {'data-test-id': 'expose-property-description'})
     if comentario:
         comentario = comentario.find('p').text.strip()
-        diccionario["coment"] = comentario
+        v_independ["coment"] = comentario
 
     # Reacondicioando de las variables numericas
     numericas = ["num_rooms", "num_bedrooms", "num_baths", "floor_number", "garage", "total_surf", "living_surf", "usable_area", "construc_year"]
@@ -165,7 +167,7 @@ def read_link(link, location):
 
 #---------------------------------------------------------------------------------------------------------------------------------
 # Esto es solo para sacar los enlaces de cada articulo, y sus respectivos precios
-num_max_pag = 2
+num_max_pag = 379
 links = []
 for num_pagina in range(num_max_pag):
     url = f"https://www.engelvoelkers.com/es/es/inmuebles/res/compra/inmobiliario?businessArea[]=residential&currency=EUR&measurementSystem=metric&page={num_pagina}&placeId=ChIJi7xhMnjjQgwR7KNoB5Qs7KY&propertyMarketingType[]=sale&sortingOptions[]=PUBLISHED_AT_DESC&placeName=Espa%C3%B1a"
@@ -203,13 +205,25 @@ for link in links:
     readed_link = read_link(url, link[2])
     lectura.append(readed_link)
 
+#--------------------------------------------------------------------------------------------------------------
+# Genero el str del dia de ejecución
+hoy = str(date.today())
+hoy  = hoy.replace("-", "_")
+ruta = "data_engelyvoelkers/"+hoy
+
+#----------------------------------------------------------------------------------------------------------------
+# Genero la carpeta de hoy
+os.makedirs(ruta, exist_ok=True)
+
 #----------------------------------------------------------------------------------------------------------------------------------------
 # Guardo los datos de la request a las paginas principales
 encabezados = ["link", "precio", "lugar"]
 df_links = pd.DataFrame(links, columns=encabezados)
-df_links.to_csv("data_engelyvoelkers/Engelyvolkers_links.csv", index=False, encoding="utf-8")
+ruta_links = ruta + "/Engelyvolkers_links.csv"
+df_links.to_csv(ruta_links, index=False, encoding="utf-8")
 
-#----------------------------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------------
 # Guardo los datos de todas las paginas
 df_lectura = pd.DataFrame(lectura)
-df_lectura.to_csv("data_engelyvoelkers/Engelyvolkers_lectura.csv", index=False, encoding="utf-8")
+ruta_lectura = ruta + "/Engelyvolkers_lectura.csv"
+df_lectura.to_csv(ruta_lectura, index=False, encoding="utf-8")
