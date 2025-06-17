@@ -16,7 +16,12 @@ class Scraggy:
             diccionario que nos indique al tributo de este elemento
         """
         self.iterate = [""]
+
         self.dict_home = {}
+        self.response_home = {}
+
+        self.dict_articles = {}
+        self.response_articles = {}
     #------------------------------------------------------------------------------------------------------------------------
     def create_dict(self, dictionary):
         """
@@ -102,10 +107,10 @@ class Scraggy:
                     break
 
                 
-                
+                self.filtro(self.dict_home, self.response_home)
                     
 
-                    links.append([link, price, place])
+                
 
 
     #------------------------------------------------------------------------------------------------------------------------
