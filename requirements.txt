@@ -4,21 +4,10 @@ pandas
 scikit-learn
 matplotlib
 seaborn
-xgboost
 tensorflow
 keras
-torch
-transformers
-datasets
+
 
 # Web Scraping
 requests
 beautifulsoup4
-selenium
-scrapy
-fake-useragent
-
-# Utilidades generales
-
-opencv-python
-scipy
